@@ -39,7 +39,7 @@ Start incoming call from command line:
 ```console
 curl -d '{"to": "+YOUR-NUMBER"}' http://YOUR-DOMAIN/start/demo --header "Content-Type:application/json"
 ```
-For Chaos conference run this command again with another number to it to the conference (first member is owner)
+For Chaos conference run this command again with another number to add  it to the conference (first member is owner)
 
 
 ### Deploy on heroku
@@ -67,7 +67,7 @@ git commit -a -m "Deployment"
 
 Run `heroku create` to create new app on Heroku and link it with current project.
 
-Change option `domain` in options.yml by assigned by Heroku value (something like damp-temple-XXXX.heroku.com). Commit your changes by `git commit -a`. 
+Change option `domain` in options.yml by assigned by Heroku value (something like XXXX-XXXXX-XXXX.heroku.com). Commit your changes by `git commit -a`. 
 
 Run `git push heroku master` to deploy this project.
 
