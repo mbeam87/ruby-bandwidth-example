@@ -54,9 +54,9 @@ post "/events/first_member" do
         :callback_url => conference_url
       })
       conference.create_member({
-        :callId => call.id,
-        :joinTone => true,
-        :leavingTone => true
+        :call_id => call.id,
+        :join_tone => true,
+        :leaving_tone => true
       })
     else
       puts "Unhandled event type #{params["eventType"]} for #{request.url}"
@@ -68,6 +68,7 @@ post "/events/other_call_events" do
   call = Call.new({:id => params["callId"]}, client)
   case(params["eventType"])
     when "answer"
+      sleep 3
       if conference_id
         call.speak_sentence("You will be join to conference.", "conference:#{conference_id}")
       else
@@ -81,7 +82,7 @@ post "/events/other_call_events" do
         return "" if params["tag"] == "notification"
         values = params["tag"].split(":")
         id = values.last
-        conference = new Conference({:id => id}, client)
+        conference = Conference.new({:id => id}, client)
         conference.create_member({
           :call_id => call.id,
           :join_tone => true
@@ -96,11 +97,13 @@ end
 post "/events/conference" do
   case (params["eventType"])
     when "conference"
-      conference_id = if ev.status == "created" then params["conferenceId"] else nil end
+      conference_id = if params["status"] == "created" then params["conferenceId"] else nil end
     when "conference-member"
       return "" if (params["state"] != "active" || params["activeMembers"] < 2) #don't speak anything to conference owner (first member)
-      member = ConferenceMember.new({:id => params["memberId"], :conference_id => params["conference_id"]}, client)
-      member.playAudio({
+      member = ConferenceMember.new({:id => params["memberId"]}, client)
+      member.conference_id = params["conferenceId"]
+      sleep 2
+      member.play_audio({
         :gender => "female",
         :locale => "en_US",
         :voice => "kate",
@@ -112,7 +115,12 @@ post "/events/conference" do
   end
 end
 
-client = Bandwidth::Client.new(options)
+opts = {}
+options.each do |k,v|
+  opts[k.to_sym] = v
+end
+
+client = Bandwidth::Client.new(opts)
 
 set :bind, "0.0.0.0"
 set :port, (ENV["PORT"] || "3000").to_i
