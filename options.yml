@@ -1,7 +1,7 @@
 user_id: your-user-id
 api_token: api-token-value
 api_secret: api-secret-value
-conference_number: "+1-number-from-catapult"
+conference_number: "+1-number-from-bandwidth"
 domain: host-and-port-of-this-app
-caller: "+1-number-from-catapult(you can use same number with conference_number)"
+caller: "+1-number-from-bandwidth(you can use same number with conference_number)"
 bridge_callee: "+1-number-which-can-receive-a-call"

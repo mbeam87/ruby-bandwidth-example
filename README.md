@@ -39,7 +39,7 @@ Start incoming call from command line:
 ```console
 curl -d '{"to": "+YOUR-NUMBER"}' http://YOUR-DOMAIN/start/demo --header "Content-Type:application/json"
 ```
-For Chaos conference run this command again with another number to add another member to the conference (first member is owner)
+For Chaos conference run this command again with another number to it to the conference (first member is owner)
 
 
 ### Deploy on heroku
