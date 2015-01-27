@@ -7,7 +7,7 @@ require "yaml"
 Call = Bandwidth::Call
 Bridge = Bandwidth::Bridge
 
-client = nil;
+client = nil
 
 options = YAML.load(File.read("./options.yml"))
 
@@ -27,7 +27,7 @@ post "/start/demo" do
   Call.create(client, {
       :from => options["caller"],
       :to => params["to"],
-      :callback_url => callbackUrl,
+      :callback_url => callback_url,
       :recording_enabled => false
   })
 end
@@ -35,51 +35,52 @@ end
 post "/events/demo" do
   call = Call.new({:id => params["callId"]}, client)
   case(params["eventType"])
-      when "answer"
-        call.speak_sentence("hello flipper", "hello-state")
-      when "speak"
-        return "" unless  params["status"] == "done"
-        case(params["tag"])
-          when "gather_complete"
-            Call.create(client, {
-                :from => options["caller"],
-                :to => options["bridge_callee"],
-                :callback_url => "http://#{options["domain"]}/events/bridged",
-                :tag => "other-leg:#{call.id}"
-            })
-          when "terminating"
-            call.hang_up()
-          when "hello-state"
-            call.playAudio({
-              :file_url => "http://#{options["domain"]}/dolphin.mp3",
-              :tag => "dolphin-state"
-            })
-        end
-      when "dtmf"
-        if params["dtmfDigit"][0] == "1"
-          call.speak_sentence("Please stay on the line. Your call is being connected.", "gather_complete")
-        else
-          call.speak_sentence("This call will be terminated", "terminating")
-        end
-      when  "playback"
-        return "" unless params["status"] == "done"
-        if params["tag"] == "dolphin-state"
-          call.create_gather({
-            :max_digits => 2,
-            :terminating_digits => "*",
-            :inter_digit_timeout => "3",
-            :prompt => {
-                :sentence => "Press 1 to speak with the fish, press 2 to let it go",
-                :loop_enabled => false,
-                :voice => "Kate"
-            },
-            :tag => "gather_started"
+    when "answer"
+      sleep 3
+      call.speak_sentence("hello flipper", "hello-state")
+    when "speak"
+      return "" unless  params["status"] == "done"
+      case(params["tag"])
+        when "gather_complete"
+          Call.create(client, {
+              :from => options["caller"],
+              :to => options["bridge_callee"],
+              :callback_url => "http://#{options["domain"]}/events/bridged",
+              :tag => "other-leg:#{call.id}"
           })
-        end
-
+        when "terminating"
+          call.hang_up()
+        when "hello-state"
+          call.play_audio({
+            :file_url => "http://#{options["domain"]}/dolphin.mp3",
+            :tag => "dolphin-state"
+          })
+      end
+    when "dtmf"
+      if params["dtmfDigit"][0] == "1"
+        call.speak_sentence("Please stay on the line. Your call is being connected.", "gather_complete")
       else
-        puts "Unhandled event type #{params["eventType"]} for #{request.url}"
-   end
+        call.speak_sentence("This call will be terminated", "terminating")
+      end
+    when  "playback"
+      return "" unless params["status"] == "done"
+      if params["tag"] == "dolphin-state"
+        call.create_gather({
+          :max_digits => 2,
+          :terminating_digits => "*",
+          :inter_digit_timeout => "3",
+          :prompt => {
+              :sentence => "Press 1 to speak with the fish, press 2 to let it go",
+              :loop_enabled => false,
+              :voice => "Kate"
+          },
+          :tag => "gather_started"
+        })
+      end
+
+    else
+      puts "Unhandled event type #{params["eventType"]} for #{request.url}"
+  end
 end
 
 post "/events/bridged" do
@@ -88,7 +89,8 @@ post "/events/bridged" do
   other_call_id = values[1]
   case (params["eventType"])
     when "answer"
-      call.speak_sentence("You have a dolphin on line 1. Watch out, he's hungry!", "warning:#{otherCallId}")
+      sleep 3
+      call.speak_sentence("You have a dolphin on line 1. Watch out, he's hungry!", "warning:#{other_call_id}")
     when "speak"
       return "" unless params["status"] == "done"
       if values[0] == "warning"
@@ -101,14 +103,19 @@ post "/events/bridged" do
       if params["cause"] == "CALL_REJECTED"
         call.speak_sentence("We are sorry, the user is reject your call", "terminating")
       else
-        call.hangUp()
+        call.hangup()
       end
     else
       puts "Unhandled event type #{params["eventType"]} for #{request.url}"
   end
 end
 
-client = Bandwidth::Client.new(options)
+opts = {}
+options.each do |k,v|
+  opts[k.to_sym] = v
+end
+
+client = Bandwidth::Client.new(opts)
 
 set :bind, "0.0.0.0"
 set :port, (ENV["PORT"] || "3000").to_i
