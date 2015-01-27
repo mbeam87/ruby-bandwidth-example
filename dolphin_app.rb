@@ -1,7 +1,7 @@
 require "sinatra"
 require "rack"
 require "rack/contrib"
-require "bandwidth"
+require "ruby-bandwidth"
 require "yaml"
 
 Call = Bandwidth::Call
