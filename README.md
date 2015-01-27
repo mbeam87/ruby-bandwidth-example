@@ -56,7 +56,7 @@ web: ruby -rubygems ./chaos_conference.rb
 web: ruby -rubygems ./dolphin_app.rb
 ```
 
-Then open `options.yml` and fill it with valid values.
+Then open `options.yml` and fill it with valid values (except `domain`).
 
 Commit your changes.
 
