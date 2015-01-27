@@ -67,7 +67,7 @@ git commit -a -m "Deployment"
 
 Run `heroku create` to create new app on Heroku and link it with current project.
 
-Change option `domain` in options.yml by assigned by Heroku value (something like damp-temple-XXXX.heroku.com)
+Change option `domain` in options.yml by assigned by Heroku value (something like damp-temple-XXXX.heroku.com). Commit your changes by `git commit -a`. 
 
 Run `git push heroku master` to deploy this project.
 
