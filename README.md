@@ -1,11 +1,14 @@
 ruby-bandwidth-example
 ======================
 
-2 demos of Catapult API
+3 demos of Catapult API
 
 Dolphin app demonstrates how to play audio, speak text to callers, and gather DTMF from the caller.
 
 Chaos Conference is a very simple conferencing app that joins users to a conference by making outbound calls to each attendee
+
+Sip App is simple application which allows to make calls directly to sip account, redirect outgoing calls from sip account to another number, redirect incoming calls from specific number to sip account. Also this application demonstrate how to receive/create an application, domain, endpoint, buy phone numbers.
+
 
 Before run them fill config file `options.yml` with right values.
 Option `conferenceNumber` is required for chaos confernce only.
@@ -32,15 +35,22 @@ Run Dolphin app demo as
 ruby -rubygems  dolphin_app.rb
 ```
 
+Run Sip app demo as
+
+```
+ruby -rubygems sip_app.rb
+```
+
 Use environment variable `PORT` to change default port (3000)
 
-Start incoming call from command line:
+For Dolphin app and Chaos conference start incoming call from command line:
 
 ```console
 curl -d '{"to": "+YOUR-NUMBER"}' http://YOUR-DOMAIN/start/demo --header "Content-Type:application/json"
 ```
 For Chaos conference run this command again with another number to it to the conference (first member is owner)
 
+For Sip app open home page in browser first (http://domain) and follow instructions on it
 
 ### Deploy on heroku
 
@@ -54,6 +64,9 @@ web: ruby -rubygems ./chaos_conference.rb
 
 # for Dolpin App
 web: ruby -rubygems ./dolphin_app.rb
+
+# for Sip App
+web: ruby -rubygems ./sip_app.rb
 ```
 
 Then open `options.yml` and fill it with valid values (except `domain`).

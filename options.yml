@@ -1,7 +1,7 @@
-user_id: your-user-id
-api_token: api-token-value
-api_secret: api-secret-value
+user_id: u-rzmdaw5mxl4jrme56jyhe5i
+api_token: t-mvpixlx2emztxuov4x3kf4y
+api_secret: x5v2dmfttswkiqxlcltisdyjq2w52u5vogzp6ki
 conference_number: "+1-number-from-bandwidth"
-domain: host-and-port-of-this-app
+domain: 188.113.34.213:3002
 caller: "+1-number-from-bandwidth(you can use same number with conference_number)"
 bridge_callee: "+1-number-which-can-receive-a-call"

@@ -49,7 +49,7 @@ post "/events/demo" do
               :tag => "other-leg:#{call.id}"
           })
         when "terminating"
-          call.hang_up()
+          call.hangup()
         when "hello-state"
           call.play_audio({
             :file_url => "http://#{options["domain"]}/dolphin.mp3",
