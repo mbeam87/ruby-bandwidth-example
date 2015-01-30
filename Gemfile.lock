@@ -20,7 +20,7 @@ GEM
       rack (>= 0.9.1)
     rack-protection (1.5.3)
       rack
-    ruby-bandwidth (1.0.1)
+    ruby-bandwidth (1.0.3)
       activesupport
       builder
       certified
