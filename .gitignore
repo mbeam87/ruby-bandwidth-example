@@ -13,6 +13,12 @@
 /test/version_tmp/
 /tmp/
 
+## 2-way-sms sample 
+anonymous-two-way-sms/db/
+anonymous-two-way-sms/log/
+anonymous-two-way-sms/test/
+anonymous-two-way-sms/tmp/
+
 ## Specific to RubyMotion:
 .dat*
 .repl_history
