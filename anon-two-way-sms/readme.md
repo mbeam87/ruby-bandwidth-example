@@ -32,6 +32,8 @@ $ heroku run rake db:migrate
 
 Login to your Bandwidth account and set-up an application and add your phone number for your phone number to send inbound text messages to heroku
 
+Messaging URL: https://<your-heroku-app>.herokuapp.com/messages
+
 http://ap.bandwidth.com/docs/how-to-guides/configuring-apps-incoming-messages-calls/
 
 Open Heroku and Set-Up Your Phone Number
