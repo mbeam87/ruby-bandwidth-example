@@ -1,1 +1,1 @@
-web: ruby -rubygems ./dolphin_app.rb
+web: ruby -rubygems ./chaos_conference.rb
