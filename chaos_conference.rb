@@ -24,7 +24,7 @@ get "/" do
   if !options["api_token"] || !options["api_secret"] || !options["conference_number"] || !options["domain"]
     "Please fill options.yml with right values"
   else
-    "This app is ready to use"
+    "This app is ready to use: Chaos Conference"
   end
 end
 

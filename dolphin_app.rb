@@ -17,7 +17,7 @@ get "/" do
     if !options["api_token"] || !options["api_secret"] || !options["caller"] || !options["bridge_callee"] || !options["domain"]
       "Please fill options.yml with right values"
     else
-      "This app is ready to use"
+      "This app is ready to use: Dolphin App"
     end
 end
 
