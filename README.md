@@ -14,6 +14,7 @@ Before run them fill config file `options.yml` with right values.
 Option `conferenceNumber` is required for chaos confernce only.
 Options `caller` and `bridgeCallee` are used by dolphin app only.
 Option `domain` should contains host name (and port) which will be used to access to the server from external network.
+option `domain_name` should contains an unique domain name
 
 ### How to run
 

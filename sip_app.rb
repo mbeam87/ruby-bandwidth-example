@@ -13,11 +13,12 @@ Domain = Bandwidth::Domain
 
 APPLICATION_NAME = "SipApp Demo"
 DOMAIN_NAME = "sip-app"
-USER_NAME = "r-user"
 
 client = nil
 sip_uri = nil, caller = nil, phone_number_for_incoming_calls = nil
 options = YAML.load(File.read("./options.yml"))
+
+DOMAIN_NAME = options["domain_name"]
 
 use Rack::PostBodyContentTypeParser
 
@@ -29,7 +30,7 @@ get "/" do
       callback_url = "http://#{options["domain"]}/events/calls"
       application = (Application.list(client).select {|a| a.name == APPLICATION_NAME}).first ||
           Application.create(client, {:name => APPLICATION_NAME, :incoming_call_url => callback_url, :auto_answer => false})
-      numbers = (PhoneNumber.list(client).select {|p| p.application.end_with?("/#{application.id}")})
+      numbers = (PhoneNumber.list(client).select {|p| p.respond_to?(:application) and p.application.end_with?("/#{application.id}")})
       if numbers.size < 2
         available_numbers = AvailableNumber.search_local(client, {:city => "Cary", :state => "NC", :quantity => 2})
         numbers = available_numbers.map {|n| PhoneNumber.create(client, {:number => n[:number], :application_id => application.id})}
