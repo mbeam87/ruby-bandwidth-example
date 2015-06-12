@@ -1,0 +1,12 @@
+user_id: "u-XXXXXXXXXXXXXXXXXXXX"
+api_token: "t-XXXXXXXXXXXXXXXXXX"
+api_secret: "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+base_url: "url like http://my-site.my-domain.com (don't add a slash at the end)"
+mail:
+  from: "field from for all outgoing email messages"
+  address: smtp.gmail.com
+  port: 587
+  user_name: "smtp user name"
+  password: "smtp password"
+  authentication: plain
+  enable_starttls_auto: true

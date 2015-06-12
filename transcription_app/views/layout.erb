@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TranscriptionApp</title>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/bootstrap/3.3.4/css/bootstrap.min.css">
+  </head>
+  <body>
+    <div class="nav navabar navbar-default" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">TranscriptionApp</a>
+        </div>
+        <% if env['warden'].user %>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="dropdown-toggle">
+              <span class="glyphicon glyphicon-user"></span>
+              <span><%= "#{env['warden'].user.email} / #{env['warden'].user.phone_number} " %></span>
+              <span class="caret"></span>
+            </a>
+            <ul role="menu" class="dropdown-menu">
+              <li>
+                <a href="/auth/logout">Sign out</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <% end %>
+      </div>
+    </div>
+    <% if flash[:success] %>
+    <div class="alert alert-info">
+      <%= flash[:success] %>
+    </div>
+    <% end %>
+
+    <% if flash[:error] %>
+    <div class="alert alert-danger">
+      <%= flash[:error] %>
+    </div>
+    <% end %>
+    <div class="container">
+      <%= yield %>
+    </div>
+    <script src="//cdn.jsdelivr.net/g/jquery@2.1.4,bootstrap@3.3.4"></script>
+  </body>
+</html>

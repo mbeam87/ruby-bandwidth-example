@@ -1,7 +1,7 @@
 ruby-bandwidth-example
 ======================
 
-3 demos of Catapult API
+4 demos of Catapult API
 
 Dolphin app demonstrates how to play audio, speak text to callers, and gather DTMF from the caller.
 
@@ -9,12 +9,15 @@ Chaos Conference is a very simple conferencing app that joins users to a confere
 
 Sip App is simple application which allows to make calls directly to sip account, redirect outgoing calls from sip account to another number, redirect incoming calls from specific number to sip account. Also this application demonstrate how to receive/create an application, domain, endpoint, buy phone numbers.
 
+Transcription App is simple voice mail app which sends email notifications to user with transcripted message text. It demonstrates how to make calls, handle incoming calls to registered number, handle events, tune on call recording, create a transcription for recording. Also it shows how to register an application on catapult and buy new phone number.
+
 
 Before run them fill config file `options.yml` with right values.
 Option `conferenceNumber` is required for chaos confernce only.
 Options `caller` and `bridgeCallee` are used by dolphin app only.
 Option `domain` should contains host name (and port) which will be used to access to the server from external network.
-option `domain_name` should contains an unique domain name
+
+Warning: Transcription App has own options.yml file. Fill it too if you are going to run this app.i Don't forget run `bundler install` there too
 
 ### How to run
 
@@ -40,6 +43,18 @@ Run Sip app demo as
 
 ```
 ruby -rubygems sip_app.rb
+```
+
+Run Transcription app demo as
+
+```
+cd transcription_app
+
+ruby -rubygems app.rb
+
+#or with rackup
+
+rackup config.ru 
 ```
 
 Use environment variable `PORT` to change default port (3000)
@@ -68,9 +83,13 @@ web: ruby -rubygems ./dolphin_app.rb
 
 # for Sip App
 web: ruby -rubygems ./sip_app.rb
+
+# for Transcription App
+web: cd transcription_app && ruby -rubygems ./app.rb
 ```
 
-Then open `options.yml` and fill it with valid values (except `domain`).
+
+Then open `options.yml` and fill it with valid values (except `domain` and `base_url`).
 
 Commit your changes.
 
@@ -81,7 +100,7 @@ git commit -a -m "Deployment"
 
 Run `heroku create` to create new app on Heroku and link it with current project.
 
-Change option `domain` in options.yml by assigned by Heroku value (something like XXXX-XXXXX-XXXX.heroku.com). Commit your changes by `git commit -a`. 
+Change option `domain` (or `base_url` for TranscriptionApp)  in options.yml by assigned by Heroku value (something like XXXX-XXXXX-XXXX.heroku.com). Commit your changes by `git commit -a`. 
 
 Run `git push heroku master` to deploy this project.
 
@@ -98,7 +117,7 @@ First instal ngrock on your computer. Run ngrock by
 ngrok http 3000 #you can use another free port if need 
 ```
 
-You will see url like http://XXXXXXX.ngrok.io on console output. Open `options.yml` and fill value `domain` by value from console (i.e. like XXXXXXX.ngrock.io). Save changes and run demo app by
+You will see url like http://XXXXXXX.ngrok.io on console output. Open `options.yml` and fill value `domain` (or `base_url` for TranscriptionApp) by value from console (i.e. like XXXXXXX.ngrock.io). Save changes and run demo app by
 
 
 ```
@@ -110,4 +129,13 @@ PORT=3000 ruby -rubygems ./dolphin_app.rb
 
 # for Sip App
 PORT=3000 ruby -rubygems ./sip_app.rb
+
+# for Transcription App
+
+PORT=3000 ruby -rubygems ./app.rb
+
+#or with rackup
+
+rackup config.ru -p 3000
+
 ```
