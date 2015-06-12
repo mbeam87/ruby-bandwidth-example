@@ -1,8 +1,7 @@
-user_id: u-rzmdaw5mxl4jrme56jyhe5i
-api_token: t-mvpixlx2emztxuov4x3kf4y
-api_secret: x5v2dmfttswkiqxlcltisdyjq2w52u5vogzp6ki
+user_id: u-xxxxxxxxxxxxxxxxxxxxxxxxx
+api_token: t-xxxxxxxxxxxxxxxxxxxxxx
+api_secret: xxxxxxxxxxxxxxx
 conference_number: "+1-number-from-bandwidth"
-domain: 188.113.34.213:3002
+domain: your-site-domain like my-site.my-domain.com
 caller: "+1-number-from-bandwidth(you can use same number with conference_number)"
 bridge_callee: "+1-number-which-can-receive-a-call"
-domain_name: "unique_domain_name"
