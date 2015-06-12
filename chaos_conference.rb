@@ -70,7 +70,7 @@ post "/events/other_call_events" do
     when "answer"
       sleep 3
       if conference_id
-        call.speak_sentence("You will be join to conference.", "conference:#{conference_id}")
+        call.speak_sentence("You will join to conference.", "conference:#{conference_id}")
       else
         call.speakSentence("We are sorry, the conference is not active.", "terminating")
       end

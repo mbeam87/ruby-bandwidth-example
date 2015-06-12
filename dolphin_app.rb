@@ -70,7 +70,7 @@ post "/events/demo" do
           :terminating_digits => "*",
           :inter_digit_timeout => "3",
           :prompt => {
-              :sentence => "Press 1 to speak with the fish, press 2 to let it go",
+              :sentence => "Press 1 to speak with the dolphin, press 2 to let it go",
               :loop_enabled => false,
               :voice => "Kate"
           },
@@ -101,7 +101,7 @@ post "/events/bridged" do
     when "hangup"
       call.id = other_call_id
       if params["cause"] == "CALL_REJECTED"
-        call.speak_sentence("We are sorry, the user is reject your call", "terminating")
+          call.speak_sentence("We are sorry, the user rejected your call", "terminating")
       else
         call.hangup()
       end
