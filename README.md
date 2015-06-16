@@ -15,6 +15,7 @@ Transcription App is simple voice mail app which sends email notifications to us
 Before run them fill config file `options.yml` with right values.
 Option `conferenceNumber` is required for chaos confernce only.
 Options `caller` and `bridgeCallee` are used by dolphin app only.
+option `domain_name` should contains an unique domain name.
 Option `domain` should contains host name (and port) which will be used to access to the server from external network.
 
 Warning: Transcription App has own options.yml file. Fill it too if you are going to run this app.i Don't forget run `bundler install` there too

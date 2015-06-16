@@ -12,7 +12,7 @@ AvailableNumber = Bandwidth::AvailableNumber
 Domain = Bandwidth::Domain
 
 APPLICATION_NAME = "SipApp Demo"
-DOMAIN_NAME = "sip-app"
+USER_NAME = "r-user"
 
 client = nil
 sip_uri = nil, caller = nil, phone_number_for_incoming_calls = nil

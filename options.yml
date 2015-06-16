@@ -5,3 +5,4 @@ conference_number: "+1-number-from-bandwidth"
 domain: your-site-domain like my-site.my-domain.com
 caller: "+1-number-from-bandwidth(you can use same number with conference_number)"
 bridge_callee: "+1-number-which-can-receive-a-call"
+domain_name: "unique_domain_name"
