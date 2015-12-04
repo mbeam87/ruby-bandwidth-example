@@ -3,7 +3,7 @@ ruby-bandwidth-example
 
 Examples using the [Ruby SDK](https://github.com/bandwidthcom/ruby-bandwidth)
 
-4 demos of [Bandwidth's App Platform](ap.bandwidth.com/?utm_medium=social&utm_source=github&utm_campaign=dtolb&utm_content=)
+4 demos of [Bandwidth's App Platform](http://ap.bandwidth.com/?utm_medium=social&utm_source=github&utm_campaign=dtolb&utm_content=)
 
 Dolphin app demonstrates how to play audio, speak text to callers, and gather DTMF from the caller.
 
